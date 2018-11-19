@@ -1,187 +1,93 @@
 #include <iostream>
-#include <string>
-#include <cmath>
-
+#include <cstdlib>
+#include <ctime>
 using namespace std;
-
-class sales {
-private:
-	int numberBook;
-	float array[3];
-public:
-	float getNB(){
-		for (int i = 0; i < 3; i++) {
-			cout << "Enter number book sold for one month : ";
-			cin >> array[i];
+/*
+template<typename T1>
+T1 SA(int x, int* mass) {
+	T1 S = 0;
+	for (int i = 0; i < x; i++) {
+		S += mass[i];
+	}
+	S /= x;
+	cout << endl << endl;
+	return S;
+}
+template<typename T1>
+T1 amax(int *mass, int size) {
+	T1 max;
+	max = (T1)*mass;
+	for (int i = 0; i < size; i++) {
+		if (max < mass[i]) {
+			max = mass[i];
+			cout << mass[i] << endl;
 		}
-		return *array;
 	}
-	void printNB() {
-		for (int i = 0; i < 3; i++) {
-			cout << array[i] << "\t";
+	return max;
+}
+*/
+//template<typename T1>
+class testclass {
+public:
+	testclass() {
+		cout << "Size mass - "; cin >> size;
+	}
+	void writemass() {
+		
+		for (int i = 0; i < size; i++) {
+			cout << "mass - ";
+			cin >> mass[i];
 		}
 	}
-};
-class publication : public sales{
-public:
-	string nameBook;
-	float cost;
+	void showmass() {
+		for (int i = 0; i < size; i++) {
+			cout << mass[i] << endl;
+		}
+	}
+	int SA() {
+		for (int i = 0; i < size; i++) {
+			S += mass[i];
+		}
+		S /= size;
+		cout << endl << endl;
+		return S;
+	}
+	int amax() {
+		max = *mass;
+		for (int i = 0; i < size; i++) {
+			if (max < mass[i]) {
+				max = mass[i];
+				cout << mass[i] << endl;
+			}
+		}
+		return max;
+	}
 
-	string getdata() {
-		cout << "Enter Name book : ";
-		cin >> nameBook;
-		return nameBook;
-	}
-	void putdata() {
-		cout << nameBook << endl;
-	}
-};
-class book : public publication {
 private:
-	int numberlist;
-public:
-	int getdata() {
-		cout << "Enter  number list : ";
-		cin >> numberlist;
-		
-		publication::getdata();
-		sales::getNB();
-
-		return  numberlist;
-	}
-	void putdata() {
-		cout << numberlist << endl;
-		publication::putdata();
-		sales::printNB() ;
-		cout << endl;
-	}
-};
-class type : public publication   {
-private:
-	float timeMin;
-public:
-	float getdata() {
-		cout << "Enter time Minute : ";
-		cin >> timeMin;
-		
-		publication::getdata();
-		sales::getNB();
-
-		return timeMin;
-	}
-	void putdata() {
-		cout << timeMin << endl;
-		publication::putdata();
-		sales::printNB();
-		cout << endl;
-	}
+	int max;
+	int S = 0;
+	int size;
+	int *mass;
 };
 
-class freeValue {
-private:
-	int x, y, z;
-public:
-	freeValue() {
-		x = 0;
-		y = 0;
-		z = 0;
-	}
-	
-	freeValue(int x, int y, int z) {
-		this->x = x;
-		this->y = y;
-		this->z = z;
-	}
+int main(int argc, char **argv) {
+	srand(time_t(NULL));
+	int  y= 5;
+	int array[5];
+	/*
+	for (int i = 0; i < y; i++) {
+		array[i] = rand() % 100 + 1;
+		cout << array[i] << endl;
+	}*/
+	//cout << SA<double>(y, array);
+	//cout << endl << amax<int>(array, y);
+	testclass d;
+	d.writemass();
+	d.amax();
+	cout << endl;
+	d.SA();
 
-	int GetX() {
-		return x;
-	}
-	void SetX(int x) {
-		this->x = x;
-	}
-	int GetY() {
-		return y;
-	}
-	void SetY(int y) {
-		this->y = y;
-	}
-	int GetZ() {
-		return z;
-	}
-	void SetZ(int z) {
-		this->z = z;
-	}
-
-
-	~freeValue() {
-
-	}
-};
-
-class KR : private freeValue {
-private:
-	int x, y, z;
-public:
-	KR() {
-		x = 0;
-		y = 0;
-		z = 0;
-	}
-
-	KR(freeValue &spare) {
-		x = spare.GetX();
-		y = spare.GetY();
-		z = spare.GetZ();
-	}
-
-	double math(freeValue &spare) {
-		double D;D = pow(y, 2) - 4 * x*z;
-		double x1, x2;
-		x1 = (y + sqrt(D)) / 2 * x;
-		x2 = (y - sqrt(D)) / 2 * x;
-		cout << x1 << "\t" << x2;
-		//cout<<spare.GetX();
-		return x1, x2;
-	}
-
-	int GetX() {
-		return x;
-	}
-	void SetX(int x) {
-		this->x = x;
-	}
-	int GetY() {
-		return y;
-	}
-	void SetY(int y) {
-		this->y = y;
-	}
-	int GetZ() {
-		return z;
-	}
-	void SetZ(int z) {
-		this->z = z;
-	}
- 	 ~KR() {
-
-	}
-
-
-};
-
-int main(int argc, char** argv) {
-	
-	book Algebra;
-	type tp;
-	Algebra.getdata();
-	Algebra.putdata();
-
-	tp.getdata();
-	tp.putdata();
-	
-	freeValue fv(1,3,-4);
-	KR kr(fv);
-	kr.math(fv);
+	cout << endl;
 	system("pause");
 	return 0;
 }
